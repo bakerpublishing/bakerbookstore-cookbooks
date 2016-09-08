@@ -32,7 +32,7 @@ end
 # Watch the log for each sidekiq worker
 if ['util'].include?(node[:instance_role])
   (node[:applications] || []).each do |app_name, app_info|
-    [0..(node[:sidekiq][:workers].to_i - 1)].each do |i|
+    (0..(node[:sidekiq][:workers].to_i - 1)).each do |i|
     follow_paths << "/var/log/engineyard/apps/#{app_name}/sidekiq_#{i}.log"
     end
   end
