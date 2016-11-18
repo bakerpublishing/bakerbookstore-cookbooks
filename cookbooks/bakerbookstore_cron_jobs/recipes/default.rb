@@ -6,7 +6,7 @@ Chef::Log.info "[bakerbookstore_cron_jobs] Adding cron jobs for BakerBookStore"
 
 if node[:name] == 'Utility'
   cron 'import' do
-    day '4' # Thursday
+    weekday '4' # Thursday
     hour '20' # 8 pm
     minute '0'
     user 'deploy'

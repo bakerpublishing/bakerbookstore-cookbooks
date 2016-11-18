@@ -1,3 +1,4 @@
+include_recipe "timezone"
 include_recipe "sidekiq"
 include_recipe "redis-yml"
 include_recipe "redis"
