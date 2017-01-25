@@ -20,7 +20,7 @@ default[:sidekiq] = {
   :queues => {
     # :queue_name => priority
     :default      => 1,
-    :email        => 2,
+    :mailers      => 2,
     :searchkick   => 2,
     :import       => 3,
   },
