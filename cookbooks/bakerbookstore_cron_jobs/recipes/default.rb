@@ -21,7 +21,7 @@ if node[:name] == 'Utility'
 
   cron 'ingram_inventory_import' do
     minute  '0' # Run on the hour
-    hours   '1,5,9,13,17,21' # On the hours listed
+    hour    '1,5,9,13,17,21' # On the hours listed
     user    'deploy'
     command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:inventory:ingram:start"
   end
