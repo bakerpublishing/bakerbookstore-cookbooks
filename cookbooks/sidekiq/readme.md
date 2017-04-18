@@ -41,7 +41,10 @@ sidekiq({
   },
 
   # Verbose
-  :verbose => false
+  :verbose => false,
+  
+  # Worker Memory Limit
+  :worker_memory_limit: 2500 # MB
 })
 ```
 
