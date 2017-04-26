@@ -13,10 +13,12 @@ if node[:name] == 'Utility'
     command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:start"
   end
 
-  cron 'export_bookstore_manager_orders' do
-    minute  '0' # Run on the hour, every hour
-    user    'deploy'
-    command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:bookstore_manager:orders"
+  if node[:environment][:framework_env] == 'production'
+    cron 'export_bookstore_manager_orders' do
+      minute  '0' # Run on the hour, every hour
+      user    'deploy'
+      command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:bookstore_manager:orders"
+    end
   end
 
   cron 'ingram_inventory_import' do

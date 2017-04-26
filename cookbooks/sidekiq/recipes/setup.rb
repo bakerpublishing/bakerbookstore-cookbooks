@@ -40,7 +40,7 @@ if util_or_app_server?(node[:sidekiq][:utility_name])
 
     # database.yml
     execute "update-database-yml-pg-pool-for-#{app_name}" do
-      connection_pool = node[:sidekiq][:workers] * node[:sidekiq][:concurrency]
+      connection_pool = node[:sidekiq][:concurrency] * node[:sidekiq][:concurrency_connection_pool_multiplier]  
       db_yaml_file = "/data/#{app_name}/shared/config/database.yml"
       command "sed -ibak --follow-symlinks 's/reconnect/pool:      #{connection_pool}\\\n  reconnect/g' #{db_yaml_file}"
       action :run

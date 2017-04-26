@@ -27,7 +27,10 @@ default[:sidekiq] = {
 
   # Verbose
   :verbose => false,
+  
+  # Concurrency Connection Pool Multiplier (db connection pool will be set as concurrency * concurrency_pool_multiplier)
+  :concurrency_connection_pool_multiplier => 3,
 
   # Worker Memory Limit
-  :worker_memory_limit: 2500 # MB
+  :worker_memory_limit => 2500 # MB
 }
