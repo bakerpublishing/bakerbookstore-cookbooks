@@ -3,8 +3,7 @@
 # Recipe:: default
 #
 
-# ban('ban name') do
-#   ip "128.23.83.192"
-#   ip "243.123.123.123", :ports => [22, 80, 443]
-#   ip "222.0.0.0/8"
-# end
+ban('rollbar_blacklist') do
+  ip '64.20.33.203'
+  ip '185.156.173.245'
+end
