@@ -11,3 +11,4 @@ if ['solo','db_master', 'db_slave'].include?(node[:instance_role])
 end
 
 include_recipe "bakerbookstore_cron_jobs"
+include_recipe "postgresql_maintenance"
