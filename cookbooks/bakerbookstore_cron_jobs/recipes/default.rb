@@ -29,8 +29,26 @@ if node[:name] == 'Utility'
   end
 
   cron 'bsm_inventory_import' do
-    minute  '22' # Run 22 after the hour, every hour
+    minute  '30' # Run 30 after the hour, every hour
     user    'deploy'
     command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:inventory:bookstore_manager:start"
+  end
+
+  cron 'bsm_standalone_import' do
+    weekday '0,1,2,3,5,6' # Everyday except Thursday (since the BSM import is run during the full import on Thursday)
+    minute  '0' # Run on the hour
+    hour    '3' # 3 am
+    user    'deploy'
+    command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:bookstore_manager:start"
+  end
+end
+
+if node[:instance_role] == 'app_master' || node[:instance_role] == 'app'
+  cron 'clean_tmp_directory' do
+    weekday '0' # Sunday
+    hour    '4' # 4 am
+    minute  '0'
+    user    'deploy'
+    command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake tmp:clear"
   end
 end
