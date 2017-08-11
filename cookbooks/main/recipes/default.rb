@@ -4,6 +4,7 @@ include_recipe "redis-yml"
 include_recipe "redis"
 include_recipe "le"
 include_recipe "ban"
+include_recipe "nginx_block_non_domain"
 
 #enable Extension modules for a given Postgresql database
 if ['solo','db_master', 'db_slave'].include?(node[:instance_role])
