@@ -2,4 +2,9 @@ server {
   listen 444 default_server;
   server_name _;
   return 403;
+
+  # SSL Certificates
+  include /etc/nginx/servers/bakerbookstore/ssl_cert;
+  include /etc/nginx/servers/bakerbookstore/ssl_cipher;
+  include /etc/nginx/servers/bakerbookstore/custom.ssl.conf;
 }
