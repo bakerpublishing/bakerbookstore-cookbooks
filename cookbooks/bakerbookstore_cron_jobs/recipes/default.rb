@@ -35,7 +35,7 @@ if node[:name] == 'Utility'
   end
 
   cron 'bsm_standalone_import' do
-    weekday '0,1,2,3,5,6' # Everyday except Thursday (since the BSM import is run during the full import on Thursday)
+    weekday '0,1,2,3,4,6' # Everyday except Friday (since the BSM import is run during the full import on Thursday nights, into Friday mornings, we want to skip running this on Friday mornings)
     minute  '0' # Run on the hour
     hour    '3' # 3 am
     user    'deploy'
