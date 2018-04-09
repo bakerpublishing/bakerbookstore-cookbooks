@@ -41,6 +41,15 @@ if node[:name] == 'Utility'
     user    'deploy'
     command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:bookstore_manager:start"
   end
+
+  if node[:environment][:framework_env] == 'production'
+    cron 'world_ship_export' do
+      hour    '0'
+      minute  '10' # Run every 10 minutes
+      user    'deploy'
+      command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:worldship"
+    end
+  end
 end
 
 if node[:instance_role] == 'app_master' || node[:instance_role] == 'app'
