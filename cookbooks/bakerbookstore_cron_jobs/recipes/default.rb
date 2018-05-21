@@ -21,13 +21,13 @@ if node[:name] == 'Utility'
     end
 
     cron 'world_ship_export' do
-      minute  '10' # Run every 10 minutes
+      minute  '*/10' # Run every 10 minutes
       user    'deploy'
       command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:worldship"
     end
 
     cron 'world_ship_import' do
-      minute '15' # Run every 15 minutes
+      minute '*/15' # Run every 15 minutes
       user   'deploy'
       command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:worldship:start"
     end
