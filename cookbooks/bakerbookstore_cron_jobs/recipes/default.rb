@@ -31,6 +31,13 @@ if node[:name] == 'Utility'
       user   'deploy'
       command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:worldship:start"
     end
+
+    cron 'parable_export' do
+      minute  0
+      hour    5  # 5AM EST/EDT
+      user   'deploy'
+      command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:parable:export_parable_csv"
+    end
   end
 
   cron 'ingram_inventory_import' do
