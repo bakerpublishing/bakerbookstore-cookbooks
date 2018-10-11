@@ -14,30 +14,30 @@ if node[:name] == 'Utility'
   end
 
   if node[:environment][:framework_env] == 'production'
-    cron 'export_bookstore_manager_orders' do
-      minute  '0' # Run on the hour, every hour
-      user    'deploy'
-      command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:bookstore_manager:orders"
-    end
+    # cron 'export_bookstore_manager_orders' do
+    #   minute  '0' # Run on the hour, every hour
+    #   user    'deploy'
+    #   command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:bookstore_manager:orders"
+    # end
 
-    cron 'world_ship_export' do
-      minute  '*/10' # Run every 10 minutes
-      user    'deploy'
-      command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:worldship"
-    end
+    # cron 'world_ship_export' do
+    #   minute  '*/10' # Run every 10 minutes
+    #   user    'deploy'
+    #   command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:worldship"
+    # end
 
-    cron 'world_ship_import' do
-      minute '*/15' # Run every 15 minutes
-      user   'deploy'
-      command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:worldship:start"
-    end
+    # cron 'world_ship_import' do
+    #   minute '*/15' # Run every 15 minutes
+    #   user   'deploy'
+    #   command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake import:worldship:start"
+    # end
 
-    cron 'parable_export' do
-      minute  0
-      hour    5  # 5AM EST/EDT
-      user   'deploy'
-      command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:parable:export_parable_csv"
-    end
+    # cron 'parable_export' do
+    #   minute  0
+    #   hour    5  # 5AM EST/EDT
+    #   user   'deploy'
+    #   command "cd /data/bakerbookstore/current && RAILS_ENV=#{node[:environment][:framework_env]} bundle exec rake export:parable:export_parable_csv"
+    # end
   end
 
   cron 'ingram_inventory_import' do
